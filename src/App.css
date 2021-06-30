@@ -4,7 +4,10 @@
 }
 
 body {
-  background-color: #020631;
+  background-image: url("https://images.unsplash.com/photo-1518655048521-f130df041f66?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1500&q=80");
+  background-repeat: no-repeat;
+  background-size: cover;
+  background-color: #000969;
 }
 
 .app {
@@ -20,7 +23,7 @@ body {
 
 .app h1,
 h2 {
-  color: white;
+  color: rgb(11, 32, 78);
 }
 
 .app .input {
