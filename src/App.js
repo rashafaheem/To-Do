@@ -1,10 +1,10 @@
-import React from 'react';
-import './App.css';
-import {useState} from 'react'
+import React from "react";
+import "./App.css";
+import { useState } from "react";
 
 function App() {
-  const [toDos,setToDos] = useState([])
-  const [toDo,setToDo] = useState('')
+  const [toDos, setToDos] = useState([]);
+  const [toDo, setToDo] = useState("");
   const [cancelled, setCancelled] = useState([]);
 
   return (
@@ -17,8 +17,26 @@ function App() {
         <h2>Make your day productive</h2>
       </div>
       <div className="input">
-        <input value= {toDo} onChange={(e)=>setToDo(e.target.value)} type="text" placeholder="🖊️ Add item..." />
-        <i onClick={()=>setToDos([...toDos,{id:Date.now(), text: toDo,status:false}])} className="fas fa-plus"></i>
+        <input
+          value={toDo}
+          type="text"
+          placeholder="Add item..."
+          onChange={(e) => setToDo(e.target.value)}
+          onKeyPress={(event) => {
+            if (event.key === "Enter") {
+              setToDos([
+                ...toDos,
+                { id: Date.now(), text: toDo, status: false },
+              ]);
+            }
+          }}
+        />
+        <i
+          onClick={() =>
+            setToDos([...toDos, { id: Date.now(), text: toDo, status: false }])
+          }
+          className="fas fa-plus"
+        ></i>
       </div>
       <div className="todos">
         {toDos.map((obj) => {
@@ -65,16 +83,16 @@ function App() {
               </div>
             );
           }
-          return null
+          return null;
         })}
         <br></br>
         <h1>Completed Tasks</h1>
-        {toDos.map((obj)=>{
-          if(obj.status){
-            return(<h1>{obj.text}</h1>)
+        {toDos.map((obj) => {
+          if (obj.status) {
+            return <h1>{obj.text}</h1>;
           }
-          return null
-          })}
+          return null;
+        })}
       </div>
     </div>
   );
