@@ -26,8 +26,6 @@ function App() {
           value={toDo}
           type="text"
           placeholder="Add item..."
-          const
-          resetInputField={() => setToDo("")}
           onChange={(e) => setToDo(e.target.value)}
           onKeyPress={(event) => {
             if (event.key === "Enter") {
@@ -49,6 +47,18 @@ function App() {
                         toDos.filter((toDoItem) => {
                           if (toDoItem.id === obj.id) {
                             toDoItem.status = e.target.checked;
+                          }
+                          return toDoItem;
+                        })
+                      );
+                    }}
+                    onClick={() => {
+                      setToDos(
+                        toDos.filter((toDoItem) => {
+                          if (toDoItem.id === obj.id) {
+                            toDoItem.deleted = true;
+                            !toDoItem.status &&
+                              setCancelled([...cancelled, toDoItem.text]);
                           }
                           return toDoItem;
                         })
@@ -85,10 +95,33 @@ function App() {
           return null;
         })}
         <br></br>
-        <h1>Completed Tasks</h1>
+        <h2>Completed Tasks</h2>
         {toDos.map((obj) => {
           if (obj.status) {
-            return <h1>{obj.text}</h1>;
+            return (
+              <div key={obj.id} className="todo">
+                <div className="left">
+                  <p>{obj.text}</p>
+                </div>
+                <div className="right">
+                  <i
+                    className="fas fa-times"
+                    onClick={() => {
+                      setToDos(
+                        toDos.filter((toDoItem) => {
+                          if (toDoItem.id === obj.id) {
+                            toDoItem.deleted = true;
+                            !toDoItem.status &&
+                              setCancelled([...cancelled, toDoItem.text]);
+                          }
+                          return toDoItem;
+                        })
+                      );
+                    }}
+                  ></i>
+                </div>
+              </div>
+            );
           }
           return null;
         })}
