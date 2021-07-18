@@ -7,6 +7,11 @@ function App() {
   const [toDo, setToDo] = useState("");
   const [cancelled, setCancelled] = useState([]);
 
+  const handleItem = () => {
+    setToDos([...toDos, { id: Date.now(), text: toDo, status: false }]);
+    setToDo("");
+  };
+
   return (
     <div className="app">
       <div className="mainHeading">
@@ -21,22 +26,16 @@ function App() {
           value={toDo}
           type="text"
           placeholder="Add item..."
+          const
+          resetInputField={() => setToDo("")}
           onChange={(e) => setToDo(e.target.value)}
           onKeyPress={(event) => {
             if (event.key === "Enter") {
-              setToDos([
-                ...toDos,
-                { id: Date.now(), text: toDo, status: false },
-              ]);
+              handleItem();
             }
           }}
         />
-        <i
-          onClick={() =>
-            setToDos([...toDos, { id: Date.now(), text: toDo, status: false }])
-          }
-          className="fas fa-plus"
-        ></i>
+        <i onClick={handleItem} className="fas fa-plus"></i>
       </div>
       <div className="todos">
         {toDos.map((obj) => {
